@@ -3,11 +3,9 @@
 noOfHeads=0
 noOfTails=0
 
-echo "Well To Flip Coin Simulator"
+echo "Welcome To Flip Coin Simulator"
 
-read -p "Do you want to flip a coin (y/n) : " permission
-
-while [ $permission == "y" ]
+while [[ $noOfHeads -ne 21 && $noOfTails -ne 21 ]]
 do
 	flipResult=$(( RANDOM%2 ))
 	if [ $flipResult -eq 0 ]
@@ -18,9 +16,13 @@ do
 		echo "Tails"
 		noOfTails=$(( $noOfTails + 1 ))
 	fi
-	read -p "Do you want to flip a coin again (y/n) : " permission
 done
 
-echo "Total number of Heads : " $noOfHeads
-echo "Total number of Tails : " $noOfTails
-
+if [ $noOfHeads -eq 21 ]
+then
+	winMargin=$(( $noOfHeads - $noOfTails ))
+	echo "Heads won by $winMargin over Tails"
+else
+	winMargin=$(( $noOfTails - $noOfHeads ))
+	echo "Tails won by $winMargin over Heads"
+fi
